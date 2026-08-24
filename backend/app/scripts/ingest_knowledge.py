@@ -101,19 +101,26 @@ def ingest_knowledge_file(
     return len(parsed)
 
 
+def ingest_all_default_sources(session: Session) -> int:
+    """Ingest bundled markdown knowledge files. Returns total chunk count."""
+    total = 0
+    for path in DEFAULT_SOURCES:
+        if not path.exists():
+            continue
+        total += ingest_knowledge_file(session, path)
+    return total
+
+
 def main() -> None:
     session = SessionLocal()
     try:
-        total = 0
+        total = ingest_all_default_sources(session)
         for path in DEFAULT_SOURCES:
-            if not path.exists():
-                print(f"Skipping missing knowledge file: {path.name}")
-                continue
-            count = ingest_knowledge_file(session, path)
-            total += count
-            print(f"Ingested {count} knowledge chunks from {path.name}")
+            if path.exists():
+                print(f"Processed {path.name}")
         if total == 0:
             raise SystemExit("No knowledge files ingested.")
+        print(f"Ingested {total} knowledge chunks total.")
     finally:
         session.close()
 

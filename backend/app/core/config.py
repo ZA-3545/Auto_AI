@@ -122,7 +122,12 @@ class Settings(BaseSettings):
     def embedding_model_resolved(self) -> str:
         """Normalize embedding model id for the active provider."""
         model = (self.EMBEDDING_MODEL or "text-embedding-3-small").strip()
-        if self.AI_PROVIDER == "openrouter" and "/" not in model:
+        provider = self.AI_PROVIDER.strip().lower()
+        uses_openrouter = provider in {"openrouter", "openroute"} or bool(
+            self.OPENROUTER_API_KEY
+            and (not self.OPENAI_API_KEY or self.OPENAI_API_KEY.startswith("sk-or-"))
+        )
+        if uses_openrouter and "/" not in model:
             return f"openai/{model}"
         return model
 

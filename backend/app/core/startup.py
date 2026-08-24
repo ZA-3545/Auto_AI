@@ -11,6 +11,7 @@ from sqlalchemy import func, select
 
 from app.core.config import database_url_looks_local, settings
 from app.core.database import SessionLocal
+from app.models.knowledge import KnowledgeChunk
 from app.models.vehicle import Vehicle
 
 logger = logging.getLogger("autoai.startup")
@@ -44,6 +45,22 @@ def seed_demo_catalog_if_empty() -> None:
         db.close()
 
 
+def ingest_knowledge_if_empty() -> None:
+    """Embed sample knowledge for RAG (Ask a question / Buying advice pages)."""
+    from app.scripts.ingest_knowledge import ingest_all_default_sources
+
+    db = SessionLocal()
+    try:
+        count = db.scalar(select(func.count()).select_from(KnowledgeChunk)) or 0
+        if count > 0:
+            logger.info("Knowledge base already has %s chunks — skip ingest", count)
+            return
+        total = ingest_all_default_sources(db)
+        logger.info("Ingested %s knowledge chunks for RAG", total)
+    finally:
+        db.close()
+
+
 def bootstrap_database() -> None:
     """Run migrations and ensure demo catalog exists (production-safe, idempotent)."""
     if database_url_looks_local(settings.DATABASE_URL):
@@ -58,4 +75,10 @@ def bootstrap_database() -> None:
         seed_demo_catalog_if_empty()
     except Exception:
         logger.exception("Database bootstrap failed — API may return errors until fixed")
-        # Do not crash the process; /health stays up for platform probes.
+    try:
+        ingest_knowledge_if_empty()
+    except Exception:
+        logger.exception(
+            "Knowledge ingest failed — Ask a question / Buying advice may show "
+            "insufficient retrieval until you run: python -m app.scripts.ingest_knowledge"
+        )
