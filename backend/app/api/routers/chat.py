@@ -51,10 +51,16 @@ def extract_chat_requirements(
     Previous session fields are retained unless reset (button / phrase).
     """
     try:
+        # Safety fallback: Agar frontend se conversation_id nahi aayi, toh nayi bana lo
+        conv_id = body.conversation_id
+        if not conv_id:
+            new_conv = create_conversation(db)
+            conv_id = new_conv.id
+
         result = extract_with_memory(
             db,
             body.message,
-            conversation_id=body.conversation_id,
+            conversation_id=conv_id,
             reset=body.reset,
         )
         record_extraction(
