@@ -24,4 +24,4 @@ EXPOSE 8000
 
 # Migrations / seed / knowledge ingest are one-off jobs (see docs/DEPLOYMENT.md).
 # Shell form so $PORT expands (Render, Railway, and similar set PORT).
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}
