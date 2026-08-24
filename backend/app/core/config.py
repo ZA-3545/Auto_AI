@@ -33,15 +33,18 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
 
-    # Comma-separated list of allowed CORS origins
+    # Comma-separated frontend origins for CORS (fully env-driven).
+    # Local default below; in production set CORS_ORIGINS to your Vercel URL(s), e.g.
+    # CORS_ORIGINS=https://your-app.vercel.app
     CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
-    # PostgreSQL connection URL
-    # Example: postgresql+psycopg2://user:password@localhost:5432/autoai
+    # PostgreSQL connection URL (sync — SQLAlchemy / Alembic / scripts).
+    # Local example: postgresql+psycopg2://user:password@127.0.0.1:5433/autoai
+    # Managed hosts often give postgres:// or postgresql:// — normalized below.
+    # Append ?sslmode=require when the provider requires TLS.
     DATABASE_URL: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/autoai"
 
-    # Async URL used when async SQLAlchemy sessions are needed later
-    # Example: postgresql+asyncpg://user:password@localhost:5432/autoai
+    # Async URL (reserved for async sessions). Same host notes as DATABASE_URL.
     DATABASE_URL_ASYNC: str = (
         "postgresql+asyncpg://postgres:postgres@localhost:5432/autoai"
     )
@@ -74,6 +77,31 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return value.strip().strip('"').strip("'")
         return value
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def _normalize_sync_database_url(cls, value: object) -> object:
+        """Accept managed-host URLs (postgres://) and prefer psycopg2 driver."""
+        if not isinstance(value, str) or not value.strip():
+            return value
+        url = value.strip().strip('"').strip("'")
+        if url.startswith("postgres://"):
+            url = "postgresql://" + url[len("postgres://") :]
+        if url.startswith("postgresql://") and "+psycopg2://" not in url and "+psycopg://" not in url:
+            url = "postgresql+psycopg2://" + url[len("postgresql://") :]
+        return url
+
+    @field_validator("DATABASE_URL_ASYNC", mode="before")
+    @classmethod
+    def _normalize_async_database_url(cls, value: object) -> object:
+        if not isinstance(value, str) or not value.strip():
+            return value
+        url = value.strip().strip('"').strip("'")
+        if url.startswith("postgres://"):
+            url = "postgresql://" + url[len("postgres://") :]
+        if url.startswith("postgresql://") and "+asyncpg://" not in url:
+            url = "postgresql+asyncpg://" + url[len("postgresql://") :]
+        return url
 
     @property
     def embedding_model_resolved(self) -> str:

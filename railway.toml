@@ -1,0 +1,13 @@
+# Railway — AutoAI API (backend). Point the service root at the repo root
+# (or set Dockerfile path in the Railway dashboard). Secrets: dashboard only.
+# See docs/DEPLOYMENT.md.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

@@ -137,28 +137,30 @@ npm run dev
 
 ### Backend (`backend/.env` — never commit)
 
-| Variable | Purpose |
-|---|---|
-| `DATABASE_URL` | Sync Postgres URL |
-| `DATABASE_URL_ASYNC` | Async URL (reserved) |
-| `CORS_ORIGINS` | Allowed frontend origins |
-| `AI_PROVIDER` | `openrouter` or `openai` |
-| `OPENROUTER_API_KEY` / `OPENAI_API_KEY` | Provider secrets |
-| `OPENROUTER_MODEL` / `OPENAI_MODEL` | Chat model ids |
-| `EMBEDDING_MODEL` | Embedding model for RAG |
-| `RAG_TOP_K` / `RAG_MIN_SIMILARITY` | Retrieval knobs |
-| `RATE_LIMIT_PER_MINUTE` | AI-adjacent endpoint limit (default 30) |
-| `LLM_MAX_RETRIES` / `LLM_RETRY_BACKOFF_SECONDS` / `LLM_TIMEOUT_SECONDS` | Reliability |
-| `CONVERSATION_RETENTION_DAYS` | Privacy purge window (default 30) |
-| `DEBUG` | Verbose SQL logs when true |
+| Variable | Kind | Purpose |
+|---|---|---|
+| `DATABASE_URL` | secret (has credentials) | Sync Postgres URL |
+| `DATABASE_URL_ASYNC` | plain / optional | Async URL (reserved) |
+| `CORS_ORIGINS` | plain | Allowed frontend origins (comma-separated) |
+| `AI_PROVIDER` | plain | `openrouter` or `openai` |
+| `OPENROUTER_API_KEY` / `OPENAI_API_KEY` | **secret** | Provider API keys |
+| `OPENROUTER_MODEL` / `OPENAI_MODEL` | plain | Chat model ids |
+| `OPENROUTER_BASE_URL` | plain | OpenRouter API base |
+| `EMBEDDING_MODEL` | plain | Embedding model for RAG |
+| `RAG_TOP_K` / `RAG_MIN_SIMILARITY` | plain | Retrieval knobs |
+| `RATE_LIMIT_PER_MINUTE` | plain | AI-adjacent endpoint limit (default 30) |
+| `LLM_MAX_RETRIES` / `LLM_RETRY_BACKOFF_SECONDS` / `LLM_TIMEOUT_SECONDS` | plain | Reliability |
+| `CONVERSATION_RETENTION_DAYS` | plain | Privacy purge window (default 30) |
+| `ENVIRONMENT` / `DEBUG` | plain | `production` / `false` in prod |
+| `APP_NAME` / `APP_VERSION` | plain | Optional metadata |
 
 ### Frontend (`frontend/.env.local`)
 
-| Variable | Purpose |
-|---|---|
-| `NEXT_PUBLIC_API_URL` | Backend base URL (e.g. `http://localhost:8000`) |
+| Variable | Kind | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | plain | Backend base URL (e.g. `http://localhost:8000`) |
 
-Templates: `backend/.env.example`, `frontend/.env.example`.
+Templates: `backend/.env.example`, `frontend/.env.example`. Production checklist: [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md).
 
 ---
 
@@ -197,6 +199,9 @@ Templates: `backend/.env.example`, `frontend/.env.example`.
 - Structured JSON logging (requests, LLM failures, approximate token/cost)  
 - Conversation retention purge: `python -m app.scripts.purge_old_conversations`  
 - Docker: `backend/Dockerfile`, `frontend/Dockerfile`, root `docker-compose.yml`  
+- Deployment-ready configs: `render.yaml`, `railway.toml` / `railway.json` (backend); Vercel root = `frontend`  
+- Step-by-step deploy checklist (accounts, env vars, migrate/seed): [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md)  
+- Production Postgres: enable pgvector with `CREATE EXTENSION IF NOT EXISTS vector;` before or via `alembic upgrade head`  
 
 ---
 

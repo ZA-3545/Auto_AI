@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.ai.openai_provider import OpenAIProvider
+from app.core.config import settings
 
 OPENROUTER_DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 OPENROUTER_DEFAULT_MODEL = "openai/gpt-4o-mini"
@@ -28,12 +29,18 @@ class OpenRouterProvider(OpenAIProvider):
         *,
         base_url: str | None = None,
     ) -> None:
+        # OpenRouter optional ranking headers — use first configured CORS origin
+        referer = (
+            settings.cors_origins_list[0]
+            if settings.cors_origins_list
+            else "https://autoai.local"
+        )
         super().__init__(
             api_key,
             normalize_openrouter_model(model),
             base_url=base_url or OPENROUTER_DEFAULT_BASE_URL,
             extra_headers={
-                "HTTP-Referer": "http://localhost:3000",
+                "HTTP-Referer": referer,
                 "X-Title": "AutoAI",
             },
             name="openrouter",
