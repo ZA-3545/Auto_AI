@@ -1,0 +1,56 @@
+# AutoAI — Independent AI Car Buying Assistant (Pakistan)
+# Independent proof of concept — not affiliated with PakWheels.
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local Postgres data (dev instance)
+backend/.pgdata/
+backend/.tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment / secrets — never commit real values
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.log
+
+# Misc
+*.pem
+.turbo/

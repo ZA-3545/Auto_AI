@@ -1,0 +1,26 @@
+{
+  "question": "What does CVT mean?",
+  "answer": "CVT stands for continuously variable transmission. It uses a belt or pulley system to vary ratios smoothly rather than relying on fixed gears. This can create a different driving experience under acceleration and is commonly found in some modern cars. The choice of transmission type, including CVT, depends on individual driving preferences, maintenance access, and repair cost expectations. \n\nPlease note that this information is for educational purposes and not a recommendation for any specific vehicle model.",
+  "grounded": true,
+  "chunks": [
+    {
+      "id": 5,
+      "source_id": "sample_automotive_knowledge",
+      "title": "Manual vs automatic vs CVT",
+      "content": "A manual transmission uses a clutch pedal and gear stick; the driver selects gears. A conventional automatic typically changes gears without a clutch pedal and can be easier in city traffic. A CVT (continuously variable transmission) uses a belt or pulley system to vary ratios smoothly rather than fixed gears, which can feel different under acceleration and is common on some modern cars. Suitability depends on driving preference, maintenance access, and repair cost expectations. This is terminology education, not a recommendation for a specific model.",
+      "similarity": 0.5859,
+      "chunk_index": 4
+    },
+    {
+      "id": 6,
+      "source_id": "sample_automotive_knowledge",
+      "title": "What engine capacity means",
+      "content": "Engine capacity (often stated in cc, such as 1300cc or 1800cc) describes the total volume of the engine's cylinders. In everyday buying conversations it is used as a rough signal of power and sometimes fuel use, but real fuel economy and performance also depend on vehicle weight, transmission, driving style, traffic, and maintenance. A larger engine is not automatically better for every buyer. Treat capacity as one specification among many, not a guarantee of economy or reliability.",
+      "similarity": 0.2917,
+      "chunk_index": 5
+    }
+  ],
+  "disclaimer": "General educational information only — not professional mechanical or financial advice. Independent proof of concept — not affiliated with PakWheels.",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini"
+}

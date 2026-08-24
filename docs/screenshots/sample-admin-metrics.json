@@ -1,0 +1,251 @@
+{
+  "generated_at": "2026-08-23T09:17:14.898168Z",
+  "disclaimer": "Internal PoC metrics only \u2014 in-process counters reset on server restart. Not affiliated with PakWheels. Access control required before public deployment.",
+  "metrics": [
+    {
+      "id": "extraction_accuracy",
+      "label": "Requirement-extraction accuracy (approx.)",
+      "status": "computed",
+      "value": 66.7,
+      "unit": "%",
+      "detail": "2/3 extractions did not request clarification",
+      "note": "Proxy: % of /api/chat/extract calls where needs_clarification=false. Not ground-truth accuracy vs human labels."
+    },
+    {
+      "id": "extraction_clarification_rate",
+      "label": "Extraction clarification rate",
+      "status": "computed",
+      "value": 33.3,
+      "unit": "%",
+      "detail": "1/3 asked for clarification",
+      "note": null
+    },
+    {
+      "id": "search_relevance",
+      "label": "Search relevance (approx.)",
+      "status": "computed",
+      "value": 50.0,
+      "unit": "%",
+      "detail": "1/2 searches returned \u22651 vehicle",
+      "note": "Proxy: non-empty catalog results, not human relevance judgment."
+    },
+    {
+      "id": "recommend_nonempty_rate",
+      "label": "Recommendation non-empty rate (approx.)",
+      "status": "computed",
+      "value": 100.0,
+      "unit": "%",
+      "detail": "1/1 recommendations returned \u22651 match",
+      "note": "Not the same as true recommendation relevance (needs human review)."
+    },
+    {
+      "id": "recommendation_relevance",
+      "label": "Recommendation relevance",
+      "status": "not_available",
+      "value": null,
+      "unit": null,
+      "detail": null,
+      "note": "Requires human judgment or real user feedback \u2014 not faked for this PoC."
+    },
+    {
+      "id": "response_latency",
+      "label": "Response latency (avg, API)",
+      "status": "computed",
+      "value": 1400.0,
+      "unit": "ms",
+      "detail": "Across 7 API requests this process lifetime",
+      "note": "Per-endpoint breakdown below. Resets on restart."
+    },
+    {
+      "id": "hallucination_rate",
+      "label": "Hallucination rate (production)",
+      "status": "manual",
+      "value": 3,
+      "unit": "automated tests",
+      "detail": "test_knowledge_rag, test_advice, listing certainty tests",
+      "note": "No runtime production rate without log review. Run pytest for the PoC gate."
+    },
+    {
+      "id": "api_cost_total",
+      "label": "Approx. API cost (session)",
+      "status": "computed",
+      "value": 0.0005,
+      "unit": "USD",
+      "detail": "1,720 tokens across 2 LLM calls",
+      "note": "Rough estimate \u2014 not billing-accurate. Resets on server restart."
+    },
+    {
+      "id": "api_cost_per_conversation",
+      "label": "API cost per conversation (approx.)",
+      "status": "computed",
+      "value": 0.00048,
+      "unit": "USD",
+      "detail": "1 conversations with linked LLM cost",
+      "note": "Only calls that passed conversation_id to LLM usage logging."
+    },
+    {
+      "id": "comparison_usage_rate",
+      "label": "Comparison usage rate",
+      "status": "computed",
+      "value": 100.0,
+      "unit": "%",
+      "detail": "1 compare vs 1 extract requests",
+      "note": "Proxy for this process lifetime."
+    },
+    {
+      "id": "listing_analysis_usage",
+      "label": "Listing-analysis usage",
+      "status": "computed",
+      "value": 1,
+      "unit": "requests",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "knowledge_usage",
+      "label": "Knowledge Usage",
+      "status": "computed",
+      "value": 1,
+      "unit": "requests",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "buying_advice_usage",
+      "label": "Buying Advice Usage",
+      "status": "computed",
+      "value": 1,
+      "unit": "requests",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "maintenance_usage",
+      "label": "Maintenance Usage",
+      "status": "not_available",
+      "value": null,
+      "unit": "requests",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "user_satisfaction",
+      "label": "User satisfaction",
+      "status": "not_available",
+      "value": null,
+      "unit": null,
+      "detail": null,
+      "note": "Requires real users and feedback \u2014 not simulated."
+    },
+    {
+      "id": "click_through_rate",
+      "label": "Click-through rate",
+      "status": "not_available",
+      "value": null,
+      "unit": null,
+      "detail": null,
+      "note": "Frontend clicks not instrumented yet."
+    },
+    {
+      "id": "rate_limit_hits",
+      "label": "Rate-limit hits (session)",
+      "status": "computed",
+      "value": 0,
+      "unit": "blocked",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "llm_failures",
+      "label": "LLM failures (session)",
+      "status": "computed",
+      "value": 0,
+      "unit": "failures",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "db_conversations",
+      "label": "Stored conversations (DB)",
+      "status": "computed",
+      "value": 1,
+      "unit": "sessions",
+      "detail": "5 messages",
+      "note": null
+    },
+    {
+      "id": "db_catalog",
+      "label": "Demo catalog size",
+      "status": "computed",
+      "value": 82,
+      "unit": "vehicles",
+      "detail": null,
+      "note": null
+    },
+    {
+      "id": "db_knowledge_chunks",
+      "label": "Knowledge chunks (DB)",
+      "status": "computed",
+      "value": 25,
+      "unit": "chunks",
+      "detail": "sample_automotive_knowledge:15, sample_buying_advice_knowledge:10",
+      "note": null
+    }
+  ],
+  "endpoint_latency": [
+    {
+      "path": "/api/vehicles/search",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 85.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/vehicles/recommend",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 120.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/vehicles/compare",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 95.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/chat/extract",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 2100.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/listings/analyze",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 3400.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/knowledge/ask",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 1800.0,
+      "p95_latency_ms": null
+    },
+    {
+      "path": "/api/advice/ask",
+      "request_count": 1,
+      "error_count": 0,
+      "avg_latency_ms": 2200.0,
+      "p95_latency_ms": null
+    }
+  ],
+  "llm_by_operation": {
+    "extract_requirements": 1,
+    "answer_from_buying_advice": 1
+  },
+  "conversations_with_llm_cost": 1
+}

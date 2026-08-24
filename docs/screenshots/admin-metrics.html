@@ -1,0 +1,230 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AutoAI — Metrics dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;font-family:'DM Sans',sans-serif;background:#faf9f7;color:#1a1f2e">
+<header style="border-bottom:1px solid #e8e4dc;padding:14px 24px;max-width:1100px;margin:0 auto">
+  <strong style="font-size:18px">AutoAI</strong> <span style="color:#6b7280;font-size:12px">Internal · Evaluation metrics</span>
+</header>
+<main style="max-width:1100px;margin:0 auto;padding:32px 24px 64px">
+  <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6b7280;margin:0 0 8px">Internal · Evaluation metrics</p>
+  <h1 style="font-size:34px;margin:0 0 8px">Metrics dashboard</h1>
+  <p style="color:#6b7280;font-size:14px;max-width:680px">PLANNING.md K.1 — read-only PoC reporting. Session counters reset on backend restart.</p>
+  <p style="border:1px solid #fde68a;background:#fffbeb;border-radius:10px;padding:10px 12px;font-size:12px;color:#78350f;line-height:1.5;margin:16px 0 24px">Internal use only — no authentication yet. Metrics marked "Not yet available" are not fabricated (Section H).</p>
+  <section style="margin-bottom:28px"><h2 style="font-size:18px;margin:0 0 12px">Computed (16)</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px"><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Requirement-extraction accuracy (approx.)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">66.7 <span style="font-size:13px;font-weight:400;color:#6b7280">%</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">2/3 extractions did not request clarification</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Proxy: % of /api/chat/extract calls where needs_clarification=false. Not ground-truth accuracy vs human labels.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Extraction clarification rate</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">33.3 <span style="font-size:13px;font-weight:400;color:#6b7280">%</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1/3 asked for clarification</p>
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Search relevance (approx.)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">50 <span style="font-size:13px;font-weight:400;color:#6b7280">%</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1/2 searches returned ≥1 vehicle</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Proxy: non-empty catalog results, not human relevance judgment.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Recommendation non-empty rate (approx.)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">100 <span style="font-size:13px;font-weight:400;color:#6b7280">%</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1/1 recommendations returned ≥1 match</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Not the same as true recommendation relevance (needs human review).</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Response latency (avg, API)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">1400 <span style="font-size:13px;font-weight:400;color:#6b7280">ms</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">Across 7 API requests this process lifetime</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Per-endpoint breakdown below. Resets on restart.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Approx. API cost (session)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">0.0005 <span style="font-size:13px;font-weight:400;color:#6b7280">USD</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1,720 tokens across 2 LLM calls</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Rough estimate — not billing-accurate. Resets on server restart.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">API cost per conversation (approx.)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">0.00048 <span style="font-size:13px;font-weight:400;color:#6b7280">USD</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1 conversations with linked LLM cost</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Only calls that passed conversation_id to LLM usage logging.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Comparison usage rate</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">100 <span style="font-size:13px;font-weight:400;color:#6b7280">%</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">1 compare vs 1 extract requests</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Proxy for this process lifetime.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Listing-analysis usage</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">1 <span style="font-size:13px;font-weight:400;color:#6b7280">requests</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Knowledge Usage</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">1 <span style="font-size:13px;font-weight:400;color:#6b7280">requests</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Buying Advice Usage</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">1 <span style="font-size:13px;font-weight:400;color:#6b7280">requests</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Rate-limit hits (session)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">0 <span style="font-size:13px;font-weight:400;color:#6b7280">blocked</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">LLM failures (session)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">0 <span style="font-size:13px;font-weight:400;color:#6b7280">failures</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Stored conversations (DB)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">1 <span style="font-size:13px;font-weight:400;color:#6b7280">sessions</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">5 messages</p>
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Demo catalog size</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">82 <span style="font-size:13px;font-weight:400;color:#6b7280">vehicles</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Knowledge chunks (DB)</h3>
+          <span style="border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Computed</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">25 <span style="font-size:13px;font-weight:400;color:#6b7280">chunks</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">sample_automotive_knowledge:15, sample_buying_advice_knowledge:10</p>
+        
+      </article></div></section>
+  <section style="margin-bottom:28px"><h2 style="font-size:18px;margin:0 0 12px">Manual / test suite (1)</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px"><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Hallucination rate (production)</h3>
+          <span style="border:1px solid #bfdbfe;background:#eff6ff;color:#1e3a8a;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Manual</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">3 <span style="font-size:13px;font-weight:400;color:#6b7280">automated tests</span></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#6b7280">test_knowledge_rag, test_advice, listing certainty tests</p>
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">No runtime production rate without log review. Run pytest for the PoC gate.</p>
+      </article></div></section>
+  <section style="margin-bottom:28px"><h2 style="font-size:18px;margin:0 0 12px">Not yet available (4)</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px"><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Recommendation relevance</h3>
+          <span style="border:1px solid #e4e4e7;background:#f4f4f5;color:#52525b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Not yet available</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">—</p>
+        
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Requires human judgment or real user feedback — not faked for this PoC.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Maintenance Usage</h3>
+          <span style="border:1px solid #e4e4e7;background:#f4f4f5;color:#52525b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Not yet available</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">— <span style="font-size:13px;font-weight:400;color:#6b7280">requests</span></p>
+        
+        
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">User satisfaction</h3>
+          <span style="border:1px solid #e4e4e7;background:#f4f4f5;color:#52525b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Not yet available</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">—</p>
+        
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Requires real users and feedback — not simulated.</p>
+      </article><article style="border:1px solid #e8e4dc;border-radius:12px;background:#fff;padding:14px">
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:13px;font-weight:600">Click-through rate</h3>
+          <span style="border:1px solid #e4e4e7;background:#f4f4f5;color:#52525b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase">Not yet available</span>
+        </div>
+        <p style="margin:0;font-size:24px;font-weight:700">—</p>
+        
+        <p style="margin:6px 0 0;font-size:11px;color:#6b7280;line-height:1.45">Frontend clicks not instrumented yet.</p>
+      </article></div></section>
+  <section><h2 style="font-size:18px;margin:0 0 12px">Endpoint latency</h2>
+    <table style="width:100%;border-collapse:collapse;border:1px solid #e8e4dc;border-radius:12px;overflow:hidden;background:#fff;font-size:13px">
+      <thead style="background:#f5f3ef;color:#6b7280;font-size:11px;text-transform:uppercase"><tr>
+        <th style="padding:8px 12px;text-align:left">Path</th><th style="padding:8px 12px;text-align:left">Requests</th><th style="padding:8px 12px;text-align:left">Errors</th><th style="padding:8px 12px;text-align:left">Avg ms</th>
+      </tr></thead><tbody><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/vehicles/search</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">85</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/vehicles/recommend</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">120</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/vehicles/compare</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">95</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/chat/extract</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">2100</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/listings/analyze</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">3400</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/knowledge/ask</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">1800</td>
+    </tr><tr style="border-bottom:1px solid #eceae4">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px">/api/advice/ask</td>
+      <td style="padding:8px 12px">1</td>
+      <td style="padding:8px 12px">0</td>
+      <td style="padding:8px 12px">2200</td>
+    </tr></tbody></table></section>
+</main>
+<footer style="border-top:1px solid #e8e4dc;padding:20px 24px;color:#6b7280;font-size:13px;max-width:1100px;margin:0 auto">Independent proof of concept — not affiliated with PakWheels.</footer>
+</body></html>

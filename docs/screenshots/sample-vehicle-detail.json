@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "make": "Toyota",
+  "model": "Corolla Gli",
+  "year": 2021,
+  "price": 5850000,
+  "city": "Lahore",
+  "condition": "used",
+  "transmission": "automatic",
+  "body_type": "sedan",
+  "fuel_type": "petrol",
+  "engine_capacity": 1300,
+  "mileage_km": 42000,
+  "fuel_average_kmpl": 12.5,
+  "resale_rating": 5,
+  "created_at": "2026-08-20T17:24:11.366428+05:00"
+}

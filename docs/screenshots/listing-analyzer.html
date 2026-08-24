@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AutoAI — Analyze listing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;font-family:'DM Sans',sans-serif;background:#faf9f7;color:#1a1f2e">
+<header style="border-bottom:1px solid #e8e4dc;background:rgba(250,249,247,.92);padding:14px 24px;display:flex;justify-content:space-between;align-items:baseline;max-width:860px;margin:0 auto">
+  <div><strong style="font-size:18px">AutoAI</strong> <span style="color:#6b7280;font-size:12px;margin-left:8px">Car buying assistant</span></div>
+  <nav style="font-size:14px;color:#6b7280">Find a car · <span style="color:#1a1f2e">Analyze listing</span> · Browse catalog</nav>
+</header>
+<main style="max-width:760px;margin:0 auto;padding:36px 24px 64px">
+  <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6b7280;margin:0 0 8px">Listing analyzer</p>
+  <h1 style="font-size:36px;margin:0 0 10px;letter-spacing:-.02em">Analyze this listing</h1>
+  <p style="color:#6b7280;font-size:15px;line-height:1.55;max-width:540px;margin:0 0 24px">Paste a seller ad. We extract structured details, compare the asking price to our reference dataset, and surface labeled caveats.</p>
+  <div style="border:1px solid #e8e4dc;border-radius:10px;background:#fff;padding:14px 16px;font-size:14px;line-height:1.55;white-space:pre-wrap;margin-bottom:16px">2019 Toyota Corolla Altis, 75,000 km, Lahore, PKR 42 lakh.
+Automatic, petrol. Single owner claimed. Accident free, original paint.
+Urgent sale — leaving country.</div>
+  <div style="display:inline-block;background:#1e293b;color:#fff;border-radius:8px;padding:10px 14px;font-size:14px;font-weight:600;margin-bottom:28px">Analyze listing</div>
+  <hr style="border:none;border-top:1px solid #e8e4dc;margin:28px 0" />
+  <section>
+    <h2 style="font-size:18px;margin:0 0 8px">Summary</h2>
+    <p style="font-size:14px;line-height:1.6;margin:0">This 2019 Toyota Corolla Altis is listed for PKR 4,200,000, which is in line with similar vehicles in our reference dataset, where the median price is PKR 4,150,000. The seller claims it is accident-free and has had a single owner, but these claims are unverified and should be treated with caution. Additionally, there is no mention of a service history, and important details like token/tax status and registration documents are not confirmed. Please note that this price comparison is based on AutoAI's demo reference dataset and not on live market authority.</p>
+    <p style="font-size:12px;color:#6b7280;margin:8px 0 0">Summary source: llm · openrouter/openai/gpt-4o-mini</p>
+  </section>
+  <section style="margin-top:28px">
+    <h2 style="font-size:18px;margin:0 0 12px">Extracted details</h2>
+    <div style="border:1px solid #e8e4dc;border-radius:10px;background:#f5f3ef;padding:16px;display:grid;gap:8px;font-size:14px">
+      <div><span style="color:#6b7280;display:inline-block;width:120px">Vehicle</span><strong>Toyota Corolla Altis</strong></div>
+      <div><span style="color:#6b7280;display:inline-block;width:120px">Year</span><strong>2019</strong></div>
+      <div><span style="color:#6b7280;display:inline-block;width:120px">Asking price</span><strong>Rs 4,200,000</strong></div>
+      <div><span style="color:#6b7280;display:inline-block;width:120px">Mileage</span><strong>75,000 km</strong></div>
+      <div><span style="color:#6b7280;display:inline-block;width:120px">Location</span><strong>Lahore</strong></div>
+    </div>
+  </section>
+  <section style="margin-top:28px">
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+      <h2 style="font-size:18px;margin:0">Price assessment</h2>
+      <span style="display:inline-flex;align-items:center;border:1px solid #fde68a;background:#fffbeb;color:#78350f;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">inference</span>
+      <span style="border:1px solid #e8e4dc;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;color:#6b7280">in line</span>
+    </div>
+    <p style="font-size:14px;line-height:1.55;margin:0 0 8px">Asking price PKR 4,200,000 appears in line with similar listings in our reference data (median PKR 4,150,000 across 3 comparable vehicle(s)).</p>
+    <p style="font-size:12px;color:#6b7280;line-height:1.5;margin:0">Price comparison is based on AutoAI's demo reference dataset only — not authoritative real-market pricing, and not affiliated with PakWheels.</p>
+    <p style="font-size:12px;color:#6b7280;margin:8px 0 0">Reference comps: 3 · median Rs 4,150,000</p>
+  </section>
+  <section style="margin-top:28px"><h3 style="margin:0 0 10px;font-size:14px">Red flags</h3><ul style="list-style:none;margin:0;padding:0"><li style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8e4dc"><div><span style="display:inline-flex;align-items:center;border:1px solid #e2e8f0;background:#f1f5f9;color:#1e293b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">unknown</span></div><p style="margin:0;font-size:14px;line-height:1.5;color:#1a1f2e">The listing claims the car is accident-free, but that is an unverified seller claim — not confirmed evidence. Treat accident history as unknown until inspected.</p></li><li style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8e4dc"><div><span style="display:inline-flex;align-items:center;border:1px solid #fde68a;background:#fffbeb;color:#78350f;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">inference</span></div><p style="margin:0;font-size:14px;line-height:1.5;color:#1a1f2e">Listing language suggests urgency to sell — may help negotiation, but also warrants careful document and condition checks.</p></li></ul></section>
+  <section style="margin-top:28px"><h3 style="margin:0 0 10px;font-size:14px">Missing information</h3><ul style="list-style:none;margin:0;padding:0"><li style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8e4dc"><div><span style="display:inline-flex;align-items:center;border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">fact</span></div><p style="margin:0;font-size:14px;line-height:1.5;color:#1a1f2e">Service history is not mentioned.</p></li><li style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8e4dc"><div><span style="display:inline-flex;align-items:center;border:1px solid #e2e8f0;background:#f1f5f9;color:#1e293b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">unknown</span></div><p style="margin:0;font-size:14px;line-height:1.5;color:#1a1f2e">No independent inspection evidence for accident history was provided in the text — treat mechanical/accident status as unverified.</p></li><li style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e8e4dc"><div><span style="display:inline-flex;align-items:center;border:1px solid #a7f3d0;background:#ecfdf5;color:#064e3b;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">fact</span></div><p style="margin:0;font-size:14px;line-height:1.5;color:#1a1f2e">Token/tax status, registration documents, and outstanding finance are not confirmed in the listing text.</p></li></ul></section>
+  <section style="margin-top:28px">
+    <h3 style="margin:0 0 10px;font-size:14px">Questions to ask the seller</h3>
+    <ol style="margin:0;padding-left:20px;font-size:14px;line-height:1.55"><li style="margin-bottom:4px">Are you the original owner?</li><li style="margin-bottom:4px">How many owners has this car had?</li><li style="margin-bottom:4px">Has the car been in any accidents? If so, what was repaired?</li><li style="margin-bottom:4px">Is the paint original, or have any panels been repainted?</li><li style="margin-bottom:4px">What is the current engine condition (noise, smoke, oil consumption)?</li><li style="margin-bottom:4px">What is the transmission condition (shifts, slips, service history)?</li><li style="margin-bottom:4px">Can the mileage be verified (service records, digital history)?</li><li style="margin-bottom:4px">Is there a complete service history available?</li><li style="margin-bottom:4px">What is the token / tax status (paid up to date)?</li><li style="margin-bottom:4px">Are the registration documents complete and clear?</li><li style="margin-bottom:4px">Is there any outstanding finance or bank hypothecation?</li><li style="margin-bottom:4px">Why are you selling?</li></ol>
+  </section>
+</main>
+<footer style="border-top:1px solid #e8e4dc;padding:20px 24px;color:#6b7280;font-size:13px;max-width:860px;margin:0 auto">Independent proof of concept — not affiliated with or endorsed by PakWheels.</footer>
+</body></html>

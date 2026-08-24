@@ -1,0 +1,32 @@
+{
+  "question": "Should I buy a used car or new one on this budget?",
+  "answer": "Neither choice is universally better — it depends on your budget, how long you plan to keep the car, and how comfortable you are verifying a used car's condition.\n\nBuying used often means a lower upfront price and slower depreciation in the first years you own the car, but you inherit unknown maintenance history and wear. Success usually means a realistic inspection before payment, clear ownership papers, and comparing total cost of ownership — not just the asking price.\n\nBuying new typically brings warranty coverage, known service history from day one, and the latest features, but costs more upfront and loses value faster in early years. Even with new cars, compare on-road cost and understand warranty and routine service requirements.\n\nOn a tight budget in Pakistan, many buyers choose a carefully inspected used car; others prefer new for peace of mind. AutoAI presents these trade-offs honestly — it is not pushing you toward either option.",
+  "grounded": true,
+  "chunks": [
+    {
+      "id": 1,
+      "source_id": "sample_buying_advice_knowledge",
+      "title": "Used vs new cars — general trade-offs",
+      "content": "Buying used often means a lower upfront price and slower depreciation in the first years you own the car, but you inherit unknown maintenance history and wear. Buying new typically brings a warranty, known service history from day one, and the latest safety or convenience features, but costs more upfront and loses value faster in early years. Neither choice is universally better — it depends on budget, how long you plan to keep the car, tolerance for repair risk, and whether you can verify the used car's condition.",
+      "similarity": 0.86,
+      "chunk_index": 0
+    },
+    {
+      "id": 2,
+      "source_id": "sample_buying_advice_knowledge",
+      "title": "When a used car may make sense",
+      "content": "Used can suit buyers who want more car for the same budget, are comfortable verifying documents and condition, and plan to keep the vehicle long enough to spread any repair costs. Key success factors include: realistic inspection before payment, clear ownership papers, understanding upcoming service items for that mileage, and comparing total cost of ownership (not just asking price).",
+      "similarity": 0.79,
+      "chunk_index": 1
+    },
+    {
+      "id": 3,
+      "source_id": "sample_buying_advice_knowledge",
+      "title": "When a new car may make sense",
+      "content": "New may suit buyers who prioritize warranty coverage, predictable early maintenance, and avoiding prior-owner unknowns. Trade-offs include higher purchase price, faster initial depreciation, and sometimes longer delivery waits for popular models.",
+      "similarity": 0.74,
+      "chunk_index": 2
+    }
+  ],
+  "disclaimer": "General educational buying guidance only — not individualized financial, legal, or mechanical advice. AutoAI presents trade-offs honestly and does not push you toward a purchase. Independent proof of concept — not affiliated with PakWheels."
+}

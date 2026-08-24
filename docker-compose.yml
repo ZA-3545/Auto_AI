@@ -1,0 +1,30 @@
+# Optional local stack (Postgres + API). Frontend is often run via `npm run dev` or Vercel.
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: autoai
+    ports:
+      - "5432:5432"
+    volumes:
+      - autoai_pg:/var/lib/postgresql/data
+
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/autoai
+      DATABASE_URL_ASYNC: postgresql+asyncpg://postgres:postgres@db:5432/autoai
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      AI_PROVIDER: openrouter
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: openai/gpt-4o-mini
+      DEBUG: "false"
+    depends_on:
+      - db
+
+volumes:
+  autoai_pg:
