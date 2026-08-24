@@ -55,10 +55,13 @@ app.include_router(admin.router)
 
 @app.get("/")
 async def root() -> dict[str, str]:
-    return {
+    from app.core.config import database_url_looks_local
+
+    payload = {
         "message": "AutoAI API",
         "docs": "/docs",
         "health": "/health",
+        "ready": "/health/ready",
         "search": "/api/vehicles/search",
         "vehicle_detail": "/api/vehicles/{id}",
         "recommend": "/api/vehicles/recommend",
@@ -71,3 +74,9 @@ async def root() -> dict[str, str]:
         "maintenance": "/api/vehicles/maintenance",
         "disclaimer": "Independent proof of concept — not affiliated with PakWheels.",
     }
+    if database_url_looks_local(settings.DATABASE_URL):
+        payload["database_warning"] = (
+            "DATABASE_URL uses localhost. In Railway → Variables, delete manual "
+            "DATABASE_URL and add Postgres reference ${{Postgres.DATABASE_URL}}."
+        )
+    return payload
