@@ -1,4 +1,14 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+/** Public Railway API — used when Vercel builds without NEXT_PUBLIC_API_URL. */
+const PRODUCTION_API_URL = "https://autoai-production-e6a4.up.railway.app";
+
+function resolveApiUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_API_URL?.trim().replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+  if (process.env.NODE_ENV === "production") return PRODUCTION_API_URL;
+  return "http://localhost:8000";
+}
+
+const API_URL = resolveApiUrl();
 
 export type HealthResponse = {
   status: string;

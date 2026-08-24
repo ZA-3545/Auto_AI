@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -6,8 +8,16 @@ from app.core.config import settings
 from app.core.errors import register_exception_handlers
 from app.core.logging_config import configure_logging
 from app.core.middleware import RequestContextMiddleware
+from app.core.startup import bootstrap_database
 
 configure_logging(debug=settings.DEBUG)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    bootstrap_database()
+    yield
+
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -16,12 +26,17 @@ app = FastAPI(
         "AutoAI — Independent AI car buying assistant for Pakistan's automotive "
         "market. Not affiliated with or endorsed by PakWheels."
     ),
+    lifespan=lifespan,
 )
 
+# Exact origins from CORS_ORIGINS + any https://*.vercel.app preview/prod host.
+_cors_origins = [o for o in settings.cors_origins_list if o != "*"]
+_allow_all = "*" in settings.cors_origins_list
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
-    allow_credentials=True,
+    allow_origins=["*"] if _allow_all else _cors_origins,
+    allow_origin_regex=None if _allow_all else r"https://[\w.-]+\.vercel\.app",
+    allow_credentials=not _allow_all,
     allow_methods=["*"],
     allow_headers=["*"],
 )

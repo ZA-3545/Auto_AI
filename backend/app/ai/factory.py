@@ -23,19 +23,29 @@ def get_ai_provider() -> AIProvider:
         openai_key if _is_openrouter_key(openai_key) else ""
     )
 
-    if provider in _OPENROUTER_ALIASES or (
-        provider == "openai" and _is_openrouter_key(openai_key)
-    ):
+    # Use direct OpenAI only when a real OpenAI key is configured (sk-…, not sk-or-…).
+    wants_direct_openai = bool(
+        openai_key and not _is_openrouter_key(openai_key) and provider == "openai"
+    )
+
+    if openrouter_key and not wants_direct_openai:
         return OpenRouterProvider(
             api_key=openrouter_key,
             model=current.OPENROUTER_MODEL or current.OPENAI_MODEL,
             base_url=current.OPENROUTER_BASE_URL,
         )
 
-    if provider == "openai":
+    if provider == "openai" or wants_direct_openai:
         return OpenAIProvider(
             api_key=openai_key,
             model=current.OPENAI_MODEL,
+        )
+
+    if openrouter_key:
+        return OpenRouterProvider(
+            api_key=openrouter_key,
+            model=current.OPENROUTER_MODEL or current.OPENAI_MODEL,
+            base_url=current.OPENROUTER_BASE_URL,
         )
 
     raise AIProviderError(

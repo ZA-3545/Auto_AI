@@ -80,11 +80,19 @@ export function HealthCheck() {
           <p className="font-medium text-destructive">Backend unreachable</p>
           <p className="text-muted-foreground">{error}</p>
           <p className="text-muted-foreground">
-            Start the API with{" "}
+            Calling{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">
+              {API_URL}
+            </code>
+            . Locally, start the API with{" "}
             <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">
               uvicorn app.main:app --reload
+            </code>
+            . On Vercel, set{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">
+              NEXT_PUBLIC_API_URL
             </code>{" "}
-            from the <code className="font-mono text-xs">backend</code> folder.
+            to your Railway HTTPS URL (no trailing slash) and redeploy.
           </p>
         </div>
       )}

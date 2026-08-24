@@ -9,8 +9,17 @@ from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, Settings
 _BACKEND_DIR = Path(__file__).resolve().parents[2]
 
 
+def _is_deployed() -> bool:
+    """True on Railway/Render/production — platform env must not be overwritten by .env."""
+    if os.getenv("RAILWAY_ENVIRONMENT") or os.getenv("RENDER"):
+        return True
+    return os.getenv("ENVIRONMENT", "").strip().lower() == "production"
+
+
 def _apply_dotenv_overrides() -> None:
-    """Force backend/.env values into the process, replacing inherited keys."""
+    """Local dev only: load backend/.env into the process."""
+    if _is_deployed():
+        return
     values = dotenv_values(_BACKEND_DIR / ".env")
     for name, value in values.items():
         if name and value is not None:
@@ -18,6 +27,11 @@ def _apply_dotenv_overrides() -> None:
 
 
 _apply_dotenv_overrides()
+
+
+def database_url_looks_local(url: str) -> bool:
+    lowered = url.lower()
+    return "localhost" in lowered or "127.0.0.1" in lowered
 
 
 class Settings(BaseSettings):
@@ -34,8 +48,9 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # Comma-separated frontend origins for CORS (fully env-driven).
-    # Local default below; in production set CORS_ORIGINS to your Vercel URL(s), e.g.
-    # CORS_ORIGINS=https://your-app.vercel.app
+    # Local default below; in production set CORS_ORIGINS to your Vercel URL(s).
+    # Code also allows https://*.vercel.app via regex. Use * to allow all origins.
+    # CORS_ORIGINS=https://auto-ai-black.vercel.app,http://localhost:3000
     CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
     # PostgreSQL connection URL (sync — SQLAlchemy / Alembic / scripts).
@@ -120,7 +135,10 @@ class Settings(BaseSettings):
         dotenv_settings: PydanticBaseSettingsSource,
         file_secret_settings: PydanticBaseSettingsSource,
     ) -> tuple[PydanticBaseSettingsSource, ...]:
-        # backend/.env must win over inherited process env (Cursor injects OPENAI_API_KEY).
+        if _is_deployed():
+            # Railway/Render dashboard vars must win over any baked-in .env file.
+            return init_settings, env_settings, dotenv_settings, file_secret_settings
+        # Local: backend/.env wins over inherited process env (Cursor injects OPENAI_API_KEY).
         return init_settings, dotenv_settings, env_settings, file_secret_settings
 
     @property
